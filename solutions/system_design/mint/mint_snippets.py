@@ -12,9 +12,10 @@ class DefaultCategories(Enum):
     # ...
 
 
-seller_category_map = {}
-seller_category_map['Exxon'] = DefaultCategories.GAS
-seller_category_map['Target'] = DefaultCategories.SHOPPING
+seller_category_map = {
+    'Exxon': DefaultCategories.GAS,
+    'Target': DefaultCategories.SHOPPING,
+}
 
 
 class Categorizer(object):

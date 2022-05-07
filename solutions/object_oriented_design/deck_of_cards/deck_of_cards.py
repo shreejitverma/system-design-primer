@@ -35,11 +35,11 @@ class BlackJackCard(Card):
         super(BlackJackCard, self).__init__(value, suit)
 
     def is_ace(self):
-        return True if self._value == 1 else False
+        return self._value == 1
 
     def is_face_card(self):
         """Jack = 11, Queen = 12, King = 13"""
-        return True if 10 < self._value <= 13 else False
+        return 10 < self._value <= 13
 
     @property
     def value(self):
@@ -55,7 +55,7 @@ class BlackJackCard(Card):
         if 1 <= new_value <= 13:
             self._value = new_value
         else:
-            raise ValueError('Invalid card value: {}'.format(new_value))
+            raise ValueError(f'Invalid card value: {new_value}')
 
 
 class Hand(object):
@@ -67,10 +67,7 @@ class Hand(object):
         self.cards.append(card)
 
     def score(self):
-        total_value = 0
-        for card in self.cards:
-            total_value += card.value
-        return total_value
+        return sum(card.value for card in self.cards)
 
 
 class BlackJackHand(Hand):

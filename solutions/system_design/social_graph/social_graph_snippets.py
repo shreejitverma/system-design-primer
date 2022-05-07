@@ -52,11 +52,7 @@ class PersonServer(object):
         self.people = {}  # key: person_id, value: person
 
     def get_people(self, ids):
-        results = []
-        for id in ids:
-            if id in self.people:
-                results.append(self.people[id])
-        return results
+        return [self.people[id] for id in ids if id in self.people]
 
 
 class UserGraphService(object):

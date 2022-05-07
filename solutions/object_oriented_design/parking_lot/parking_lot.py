@@ -64,10 +64,7 @@ class ParkingLot(object):
         self.levels = []  # List of Levels
 
     def park_vehicle(self, vehicle):
-        for level in self.levels:
-            if level.park_vehicle(vehicle):
-                return True
-        return False
+        return any(level.park_vehicle(vehicle) for level in self.levels)
 
 
 class Level(object):
@@ -87,9 +84,8 @@ class Level(object):
         spot = self._find_available_spot(vehicle)
         if spot is None:
             return None
-        else:
-            spot.park_vehicle(vehicle)
-            return spot
+        spot.park_vehicle(vehicle)
+        return spot
 
     def _find_available_spot(self, vehicle):
         """Find an available spot where vehicle can fit, or return None"""
@@ -111,12 +107,10 @@ class ParkingSpot(object):
         self.vehicle = None
 
     def is_available(self):
-        return True if self.vehicle is None else False
+        return self.vehicle is None
 
     def can_fit_vehicle(self, vehicle):
-        if self.vehicle is not None:
-            return False
-        return vehicle.can_fit_in_spot(self)
+        return False if self.vehicle is not None else vehicle.can_fit_in_spot(self)
 
     def park_vehicle(self, vehicle):
         pass
